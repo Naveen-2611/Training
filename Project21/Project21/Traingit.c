@@ -8,5 +8,6 @@
 #include<stdio.h>
 void main () {
 	printf ("Hellow world");
+	printf ("Hellow world");
 }
 getch;
