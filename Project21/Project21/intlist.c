@@ -9,191 +9,204 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include<stdbool.h>
-/// <summary>
-/// this will create a new linked list.
-/// </summary>
-/// <returns></returns>
+#include <malloc.h>
 
 bool deleted;// Boolean varaible to keep track of deleted list 
-Node* create () {// creating a NULL pointer
-	Node* head = NULL;
-	deleted = false;
-	return head;
+
+/// <summary>Creates a new LinkedList to hold integers</summary>
+/// <returns>pointer to linked list</returns>
+LinkedList* Create () {
+	LinkedList* list = (LinkedList*)malloc (sizeof (LinkedList));
+	if (list != NULL) {
+		list->head = NULL;
+		list->deleted = false;
+	}
+	return list;
 }
-Node* createNode (int data) { //creates a new node with specified value
-	Node* newNode = NULL;
-	newNode = (Node*)malloc (sizeof (Node));
+Node* CreateNode (int data) { //creates a new node with specified value
+	Node* newNode = (Node*)malloc (sizeof (Node));
 	if (newNode != NULL) {
 		newNode->data = data;
 		newNode->next = NULL;
 	}
 	return newNode;
 }
-/// <summary>
-/// insert the value at end
-/// </summary>
+
+
+/// <summary>Adds element to the end of the list</summary>
 /// <param name="head"></param>
 /// <param name="data"></param>
-int Add (struct Node** head, int data) { //Function to insert a new node at the end of the list
-	if (deleted == true) return List_does_not_exist;
-	Node* newNode = createNode (data);
-	if (*head == NULL) {
-		*head = newNode;
+/// <returns>Error code (if any)</returns>
+int Add (LinkedList* list, int data) {
+	//checks if the list is deleted
+	if (list->deleted == true) return E_LIST_DOES_NOT_EXIST;
+	//checks if the list is empty
+	Node* newNode = CreateNode (data);
+	if (list->head == NULL) {
+		list->head = newNode;
 		return 0;
 	}
-	// Create a pointer to iterate till the last node
-	Node* current = *head;
+	// if the list is not empty, it iterates to the desired position
+	Node* current = list->head;
 	while (current->next != NULL) {
 		current = current->next;
 	}
-	// make the next of the tail to the new Node
 	current->next = newNode;
 	return 0;
 }
 
-/// <summary>
-/// count the no of elements in the list
-/// </summary>
+
+
+/// <summary>Return the number of elements in list</summary>
 /// <param name="head"></param>
-/// count the no of elements in the list
-int Count (Node** head) { //Counts number of nodes in linked list
-	if (deleted == true) return List_does_not_exist;
-	Node* temp = *head;
+/// <returns>Error code (if any)</returns>
+int Count (LinkedList* list) {
+	//checks if the list is deleted
+	if (list->deleted == true) return E_LIST_DOES_NOT_EXIST;
+	//if the list is not deleted, it iterates to get count
 	int count = 0;
-	while (temp != NULL) {
+	Node* current = list->head;
+	while (current != NULL) {
 		count++;/// Increment count by 1
-		temp = temp->next;
+		current = current->next;
 	}
 	return count;///Return the count of nodes
 }
-/// <summary>
-/// Delete entire list
-/// </summary>
+
+
+/// <summary>Delete the entire list</summary>
 /// <param name="head"></param>
-int Delete (Node** head) {// Delete the entire list 
-	if (deleted == true) return List_does_not_exist;// check the list is empty and delete list
-	Node* current = *head;
+/// <returns>Error code (if any)</returns>
+int Delete (LinkedList* list) {
+	//checks if the list is deleted
+	if (list->deleted == true) return E_LIST_DOES_NOT_EXIST;
+	//Checks if the list is empty and deletes list
+	Node* current = list->head;
 	Node* next = NULL;
-	if (current == NULL); {
-		deleted = true;
+	if (current == NULL) {
+		list->deleted = true;
 		return 0;
 	}
+	//if the list is not empty, it iterates to the end and deletes all nodes
 	while (current != NULL) {
 		next = current->next;
 		free (current);
 		current = next;
 	}
-	*head = NULL;
-	deleted = true;
+	list->head = NULL;
+	list->deleted = true;
 	return 0;
 }
-/// <summary>
-/// removes the first occurrence of a specific element.
-/// </summary>
+/// <summary>Removes the first occurrence of specified value in list</summary>
 /// <param name="head"></param>
 /// <param name="data"></param>
-int Remove (Node** head, int data) {// Removes the first occurrence of the specified value
-	if (deleted == true) return List_does_not_exist;// check the list is empty and delete list
-	Node* temp = *head;
+/// <returns>Error code (if any)</returns>
+int Remove (LinkedList* list, int data) {
+	// checks if the list is deleted
+	if (list->deleted == true) return E_LIST_DOES_NOT_EXIST;
+	//Checks if the list is empty
+	Node* temp = list->head;
 	Node* pre = NULL;
-	if (temp == NULL) return Empty_list;
-
+	if (temp == NULL) return E_EMPTY_LIST;
+	//Check if the data in head(1st node) is to be removed
 	if (temp != NULL && temp->data == data) {
-		*head = temp->next;
+		list->head = temp->next;
 		free (temp);
 		return 0;
 	}
-	while (temp != NULL && temp->data != data) {
+	//if the list is not empty, it iterates to remove the data at spec.index
+	while (temp != NULL && temp->data != data) {//if the list is not empty, it iterates to remove the data at spec. index
 		pre = temp;
 		temp = temp->next;
 	}
+	//checks if index exceeds list count
 	if (temp != NULL) {
 		pre->next = temp->next;
 		free (temp);
 		return 0;
 	}
 	else {
-		return Value_not_found;
+		return E_VALUE_NOT_FOUND;
 	}
 }
-/// <summary>
-/// this will remove the element at a particular index 
-/// </summary>
+/// <summary>Removes the value at a specified index</summary>
 /// <param name="head"></param>
 /// <param name="index"></param>
-/// <returns></returns>
-int RemoveAt (Node** head, int index) { //Removes the specified value based on the index
-	if (deleted == true) return List_does_not_exist;// check the list is empty and delete list
-	Node* temp = *head;
+/// <returns>Error code (if any)</returns>
+int RemoveAt (LinkedList* list, int index) {
+	//checks if the list is deleted
+	if (list->deleted == true) return E_LIST_DOES_NOT_EXIST;
+	//Checks if the list is empty
+	Node* temp = list->head;
 	Node* pre = NULL;
-	if (temp == NULL) return Empty_list;
-
+	if (temp == NULL) return E_EMPTY_LIST;
+	//Check if the data in head(1st node) is to be removed
 	if (index == 0) {
-		*head = temp->next;
+		list->head = temp->next;
 		free (temp);
 		return 0;
 	}
-
+	//if the list is not empty, it iterates to remove the data at spec. index
 	for (int i = 0; temp != NULL && i < index; i++) {
 		pre = temp;
 		temp = temp->next;
 	}
+	//checks if index exceeds list count
 	if (temp != NULL && pre != NULL) {
 		pre->next = temp->next;
 		free (temp);
 		return 0;
 	}
 	else {
-		return Index_out_of_range;
+		return E_INDEX_OUT_OF_RANGE;
 	}
-
 }
 
-/// <summary>
-/// Inser the value in specified index
-/// </summary>
+/// <summary>Inserts the value at a specified index</summary>
 /// <param name="head"></param>
 /// <param name="data"></param>
 /// <param name="index"></param>
-/// <returns></returns>
-
-int Insert (Node** head, int data, int index) {// Insert a value at specified index
-	if (deleted == true) return List_does_not_exist;// check the list is empty and delete list
-	Node* newnode = createNode (data);
+/// <returns>Error code (if any)</returns>
+int Insert (LinkedList* list, int data, int index) {
+	//checks if the list is deleted
+	if (list->deleted == true) return E_LIST_DOES_NOT_EXIST;
+	// Checks if the inserted node is going to be the head
+	Node* newNode = CreateNode (data);
 	if (index == 0) {
-		newnode->next = *head;
-		*head = newnode;
+		newNode->next = list->head;
+		list->head = newNode;
 		return 0;
 	}
-	Node* temp = *head;
+	//if the list is not empty, it iterates to get the data at spec. index
+	Node* temp = list->head;
 	for (int i = 0; i < index - 1 && temp != NULL; i++) {
 		temp = temp->next;
-
 	}
+	// checks if index exceeds list count
 	if (temp == NULL || index < 0) {
-		free (newnode);
-		return Index_out_of_range;
+		free (newNode);
+		return E_INDEX_OUT_OF_RANGE;
 	}
-	newnode->next = temp->next;
-	temp->next = newnode;
+	newNode->next = temp->next;
+	temp->next = newNode;
 	return 0;
 }
-/// <summary>
-///  gets the element at a particular index.
-/// </summary>
+/// <summary>Returns the value at a specified index</summary>
 /// <param name="head"></param>
 /// <param name="index"></param>
-/// <returns></returns>
-int Get (Node* head, int index) {//Get the value on specied index
-	if (deleted == true) return List_does_not_exist;// check the list is empty and delete list
-	Node* temp = head;
-	if (temp == NULL) return; Empty_list; //Checks if the list is empty
+/// <returns>Error code (if any)</returns>
+int Get (LinkedList* list, int index) {
+	//checks if the list is deleted
+	if (list->deleted == true) return E_LIST_DOES_NOT_EXIST;
+	//Checks if the list is empty
+	Node* temp = list->head;
+	if (temp == NULL) return E_EMPTY_LIST;
+	//iterates to get the value at index
 	int count = 0;
 	while (temp != NULL) {
-		if (count == index)
-			return(temp->data);
+		if (count == index) return(temp->data);
 		count++;
 		temp = temp->next;
 	}
-	return Index_out_of_range;
+	return  E_INDEX_OUT_OF_RANGE;
 }
