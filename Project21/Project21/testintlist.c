@@ -88,8 +88,9 @@ int main () {
 	Add (headPtr6, 10);
 	Add (headPtr6, 20);
 	Add (headPtr6, 30);
-	printf ("Expected: 20\n");
-	int a = Get (headPtr6, 1);
+	printf ("Expected: 0\n");
+	int data;
+	int a = Get (headPtr6, 1,&data);
 	printf ("Output: %d\n", a);
 	Delete (headPtr6);
 
@@ -98,7 +99,7 @@ int main () {
 	printf ("\nCase 8:\n");
 	LinkedList* headPtr7 = Create ();
 	printf ("Expected: -2\n");
-	int b = Get (headPtr7, 1);
+	int b = Get (headPtr7, 1, &data);
 	printf ("Output: %d\n", b);
 	Delete (headPtr7);
 
@@ -110,7 +111,7 @@ int main () {
 	Add (headPtr8, 12);
 	Add (headPtr8, 13);
 	printf ("Expected: -1\n");
-	int c = Get (headPtr8, 3);
+	int c = Get (headPtr8, 3, & data);
 	printf ("Output: %d\n", c);
 	Delete (headPtr8);
 
@@ -125,7 +126,7 @@ int main () {
 	printf ("Output: %d\n", Count (headPtr9));
 	Delete (headPtr9);
 
-	//case11: create a Linked List and try giving negative values as index
+	//case11: create a Linked List and try giving Negative values as index
 	printf ("\nCase 11:\n");
 	LinkedList* headPtr10 = Create ();
 	Add (headPtr10, 11);
@@ -135,5 +136,7 @@ int main () {
 	int d = Insert (headPtr10, 10, -2);
 	printf ("Output: %d\n", d);
 	Delete (headPtr10);
+
+
 
 }
