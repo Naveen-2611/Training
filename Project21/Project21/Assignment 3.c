@@ -1,36 +1,47 @@
-////// ------------------------------------------------------------------------------------------------
-//// Assignment 3 ~ A training program for new joiners at Metamation, Batch - July 2024.
-//// Copyright (c) Metamation India.
-//// ------------------------------------------------------------------
-//// Assignment 3
-//// Decimal to Binary conversion and Decimal to HexaDecimal conversion
-//// ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
+// Assignment 3 ~ A training program for new joiners at Metamation, Batch - July 2024.
+// Copyright (c) Metamation India.
+// ------------------------------------------------------------------
+// Assignment 3
+// Decimal to Binary conversion and Decimal to HexaDecimal conversion
+// ------------------------------------------------------------------------------------------------
 #include<stdio.h>
-#define INT_SIZE sizeof(int) * 8
+#include <malloc.h>
+#define INT_SIZE sizeof(int)*8
 #define HEX_SIZE 8
+int binCount = 0;
 
-int DecimalToBinary () {// Function to convert a decimal number to binary
-   int n = 0, index = 0;// Declare variables: 'n' to store the input number
-   int binary[INT_SIZE]; // Array to store the binary representation of the number
-   printf ("Enter decimal number:");
-   int m = scanf ("%d", &n);
+/// <summary>Function to convert a decimal number to binary</summary>
+int DecimalToBinary (int n) { 
+   int temp = 0;
+   temp = n;
+   while (temp != 0) {
+      temp = temp / 2;
+      binCount++;
+   }
+   if (binCount % HEX_SIZE != 0) binCount = binCount + (HEX_SIZE - (binCount % HEX_SIZE));
+   int index = 0;
+   int* binary = (int*)malloc (binCount * sizeof (int)); 
    int num = n;
-   index = INT_SIZE - 1;
+   index = binCount - 1; 
    while (index >= 0) {
-      binary[index] = n & 1;// Extract the least significant bit (LSB) from 'n' and store it in the binary array at the current index
-      index--;// Decrement the index to move to the next position in the array
-      n >>= 1;// Right-shift 'n' by one bit to remove the extracted bit and prepare for the next iteration
+      binary[index] = n & 1;// Extract the least significant bit (LSB) from 'n' 
+      index--;
+      n >>= 1;// Right-shift 'n' by one bit to remove the extracted bit 
    }
    printf ("Binary value: ");
-   for (int i = 0; i < INT_SIZE; i++)
-      printf ("%d", binary[i]);// Print each bit of the binary array from the most significant bit to the least significant bit
+   for (int i = 0; i < binCount; i++)
+      printf ("%d", binary[i]);
    printf ("\n");
+   binCount = 0;
    return num;
 }
+
+/// <summary>Function to convert a decimal number to Hexadecimal</summary>
 void DecimalToHexadecimal (int num) {
-   char hex[HEX_SIZE + 1];// Array to store the hexadecimal digits plus one extra character for the null
-   unsigned int unsNum = (unsigned int)num; //Convert the input number to an unsigned integer for proper bitwise operations
-   char hexChars[] = "0123456789ABCDEF";// Extract the last 4 bits (1 hex digit) and map it to the corresponding hex character
+   char hex[HEX_SIZE + 1];// Array to store the hexadecimal digits 
+   unsigned int unsNum = (unsigned int)num; //Convert the input number to an unsigned integer 
+   char hexChars[] = "0123456789ABCDEF";// Extract the last 4 bits (1 hex digit) 
    int index = HEX_SIZE;
    for (int i = index - 1; i >= 0; i--) {
       hex[i] = hexChars[unsNum & 0xF];
@@ -40,7 +51,23 @@ void DecimalToHexadecimal (int num) {
    printf ("Hexadecimal value: %s\n\n", hex);
 }
 
-void main () {
-   int input = DecimalToBinary ();
-   DecimalToHexadecimal (input);
+int main () {
+   int dec;
+   char term;
+   while (1) {
+      printf ("Enter decimal number: ");
+      if (scanf_s ("%d%c", &dec, &term, 1) != 2 || term != '\n') {
+         printf ("Invalid Number!\n");
+         for (;;) {
+            term = fgetc (stdin);
+            if (term == EOF || term == '\n')
+               break;
+         }
+      }
+      else {
+         int input = DecimalToBinary (dec);
+         DecimalToHexadecimal (input);
+      }
+   }
+   return 0;
 }
