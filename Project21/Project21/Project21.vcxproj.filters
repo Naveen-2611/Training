@@ -18,5 +18,8 @@
     <ClCompile Include="Assignment 3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="practice.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

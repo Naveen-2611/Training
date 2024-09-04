@@ -44,14 +44,8 @@ int main () {
    int dec;
    char term;
    printf ("Enter decimal number: ");
-   if (scanf_s ("%d%c", &dec, &term, 1) != 2 || term != '\n') {
+   if (scanf_s ("%d%c", &dec, &term, 1) != 2 || term != '\n') 
       printf ("Invalid Number!\n");
-      for (;;) {
-         term = fgetc (stdin);
-         if (term == EOF || term == '\n')
-            break;
-      }
-   }
    else {
       int input = DecimalToBinary (dec);
       DecimalToHexadecimal (input);
