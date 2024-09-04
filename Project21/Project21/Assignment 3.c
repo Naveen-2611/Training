@@ -13,27 +13,19 @@ int binCount = 0;
 
 /// <summary>Function to convert a decimal number to binary</summary>
 int DecimalToBinary (int n) { 
-   int temp = 0;
-   temp = n;
-   while (temp != 0) {
-      temp = temp / 2;
-      binCount++;
-   }
-   if (binCount % HEX_SIZE != 0) binCount = binCount + (HEX_SIZE - (binCount % HEX_SIZE));
+   
    int index = 0;
-   int* binary = (int*)malloc (binCount * sizeof (int)); 
+   int binary[INT_SIZE];
    int num = n;
-   index = binCount - 1; 
+   index = INT_SIZE - 1;
    while (index >= 0) {
-      binary[index] = n & 1;// Extract the least significant bit (LSB) from 'n' 
-      index--;
+      binary[index--] = n & 1;// Extract the least significant bit (LSB) from 'n' 
       n >>= 1;// Right-shift 'n' by one bit to remove the extracted bit 
    }
    printf ("Binary value: ");
-   for (int i = 0; i < binCount; i++)
-      printf ("%d", binary[i]);
+   for (int i = 0; i < INT_SIZE; i++)
+      printf("%d", binary[i]);
    printf ("\n");
-   binCount = 0;
    return num;
 }
 
@@ -54,7 +46,6 @@ void DecimalToHexadecimal (int num) {
 int main () {
    int dec;
    char term;
-   while (1) {
       printf ("Enter decimal number: ");
       if (scanf_s ("%d%c", &dec, &term, 1) != 2 || term != '\n') {
          printf ("Invalid Number!\n");
@@ -68,6 +59,5 @@ int main () {
          int input = DecimalToBinary (dec);
          DecimalToHexadecimal (input);
       }
-   }
    return 0;
 }
