@@ -6,14 +6,11 @@
 // Decimal to Binary conversion and Decimal to HexaDecimal conversion
 // ------------------------------------------------------------------------------------------------
 #include<stdio.h>
-#include <malloc.h>
 #define INT_SIZE sizeof(int)*8
 #define HEX_SIZE 8
-int binCount = 0;
 
 /// <summary>Function to convert a decimal number to binary</summary>
-int DecimalToBinary (int n) { 
-   
+int DecimalToBinary (int n) {
    int index = 0;
    int binary[INT_SIZE];
    int num = n;
@@ -24,7 +21,7 @@ int DecimalToBinary (int n) {
    }
    printf ("Binary value: ");
    for (int i = 0; i < INT_SIZE; i++)
-      printf("%d", binary[i]);
+      printf ("%d", binary[i]);
    printf ("\n");
    return num;
 }
@@ -46,18 +43,18 @@ void DecimalToHexadecimal (int num) {
 int main () {
    int dec;
    char term;
-      printf ("Enter decimal number: ");
-      if (scanf_s ("%d%c", &dec, &term, 1) != 2 || term != '\n') {
-         printf ("Invalid Number!\n");
-         for (;;) {
-            term = fgetc (stdin);
-            if (term == EOF || term == '\n')
-               break;
-         }
+   printf ("Enter decimal number: ");
+   if (scanf_s ("%d%c", &dec, &term, 1) != 2 || term != '\n') {
+      printf ("Invalid Number!\n");
+      for (;;) {
+         term = fgetc (stdin);
+         if (term == EOF || term == '\n')
+            break;
       }
-      else {
-         int input = DecimalToBinary (dec);
-         DecimalToHexadecimal (input);
-      }
+   }
+   else {
+      int input = DecimalToBinary (dec);
+      DecimalToHexadecimal (input);
+   }
    return 0;
 }
