@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DectoBin &amp;DectoHexa.c">
+    <ClCompile Include="conversionfile.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Testcase file.c">
+    <ClCompile Include="Testcase .c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DectoBin &amp;DectoHexa.h">
+    <ClInclude Include="conversionfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DectoBin &amp;DectoHexa.c" />
-    <ClCompile Include="Testcase file.c" />
+    <ClCompile Include="conversionfile.c" />
+    <ClCompile Include="Testcase .c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DectoBin &amp;DectoHexa.h" />
+    <ClInclude Include="conversionfile.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
