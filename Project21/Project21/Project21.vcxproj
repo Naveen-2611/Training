@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="conversionfile.c" />
-    <ClCompile Include="Testcase .c" />
+    <ClCompile Include="Testcase.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="conversionfile.h" />

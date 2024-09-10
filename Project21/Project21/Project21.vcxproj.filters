@@ -18,7 +18,7 @@
     <ClCompile Include="conversionfile.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Testcase .c">
+    <ClCompile Include="Testcase.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
