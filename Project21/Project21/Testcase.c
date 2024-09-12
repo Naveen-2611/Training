@@ -7,16 +7,17 @@
 // ------------------------------------------------------------------------------------------------
 #include"conversionfile.h"
 
-void PrintResult (int input[],char* output[],char*(*func)(int)) {
-   for (int i = 0; i < 11; i++) {
+void PrintResult (int input[], char* output[], char* (*func)(int), int length) {
+   for (int i = 0; i < length; i++) {
       printf ("TestCase%2d: input->%12d ", i + 1, input[i]);
       printf ((strcmp (func (input[i]), output[i]) == 0) ? ("%11s", "pass\n") : (" %11s", "Fail\n"));
    }
 }
 
 int main () {
-   int arr[] = { -255,65535, 5125412, -592,859,-7587,865482,0,-1784587,-2147483648ll,-2147483649ll };
-   //checking the value for Hexadecimal value
+   int arr[] = { -255,65535, 5125412, -592,859,-7587,865482,0,-1784587,INT_MIN,-2147483649ll };
+   int len = sizeof (arr) / sizeof (arr[0]);
+//checking the value for Hexadecimal value
    char* hex[] = { "FFFFFF01",
       "0000FFFF",
       "004E3524",
@@ -28,7 +29,7 @@ int main () {
       "FFE4C4F5",
       "80000000",
       "FFFFFFFF7FFFFFFF" };
-   //checking the value for Binaryvalue
+//checking the value for Binaryvalue
    char* binary[] = { "11111111111111111111111100000001",
       "00000000000000001111111111111111",
       "00000000010011100011010100100100",
@@ -42,33 +43,35 @@ int main () {
    "1111111111111111111111111111111101111111111111111111111111111111" };
 
    printf ("*****DecimaltoBinary*****\n");
-   PrintResult (arr, binary, DecimalToBinary);
-  
+   PrintResult (arr, binary, DecimalToBinary, len);
+
    printf ("\n*****DecimaltoHexadecimal*****\n");
-   PrintResult (arr, hex,DecimalToHexadecimal);
-   
-       //To get an user input 
-      while (1) {
-         char input[100];
-         int number = 0;
-         char* endptr;
-         printf ("\nEnter an integer: ");
-         if (fgets (input, sizeof (input), stdin) != NULL) {
-            errno = 0;
-            number = strtol (input, &endptr, 10);
-            if (endptr == input || *endptr != '\n' && *endptr != '\0' || (number == LONG_MAX || number == LONG_MIN) && errno == ERANGE
-                || number > INT_MAX || number < INT_MIN || input[0] == ' ') {
-               printf ("INVALID!!!\n");
-               
-            }
-            else {
-               printf ("Binary value:%s", DecimalToBinary (number));
-               printf ("\nHexadecimal value:%s\n", DecimalToHexadecimal (number));
-            }
-         }
-         else {
+   PrintResult (arr, hex, DecimalToHexadecimal, len);
+
+//To get an user input 
+   while (1) {
+      char input[100];
+      int number = 0;
+      char* endptr;
+      printf ("\nEnter an integer: ");
+      if (fgets (input, sizeof (input), stdin) != NULL) {
+         errno = 0;
+         number = strtol (input, &endptr, 10);
+         if (endptr == input || *endptr != '\n' && *endptr != '\0' || input[0] == ' ') {
             printf ("INVALID!!!\n");
          }
+         else if (errno == ERANGE) {
+            printf ("INDEX OUT OF RANGE\n");
+         }
+         else {
+            printf ("Binary value:%s", DecimalToBinary (number));
+            printf ("\nHexadecimal value:%s\n", DecimalToHexadecimal (number));
+            return 0;
+         }
       }
-      return 0;
+      else {
+         printf ("INVALID!!!\n");
+      }
    }
+   return 0;
+}
