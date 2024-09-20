@@ -3,7 +3,7 @@
 // Copyright (c) Naveenkumar S @Metamation India.
 // ------------------------------------------------------------------
 // Palindrome.c
-// C program to Check the Palindrome or not
+// C program to Check whether string or an integer is Palindrome or not
 // ------------------------------------------------------------------------------------------------
 
 #include <stdio.h>
@@ -42,7 +42,7 @@ bool NumberIsPalindrome (int num) {
       return false;
    }
    int org = num;
-   long long int rev = 0;
+   long long int rev = 0; // used to store reverse number exceeding integer range
    while (num != 0) {
       rev = rev * 10 + num % 10;
       num /= 10;
@@ -71,14 +71,13 @@ bool StringIsPalindrome (char* sentences) {
 
 /// <summary>Function to get integer input from user</summary>
 void IntegerInput (int option) {
-   char ch = '\n';
+   errno = 0;
    char input[MAX_VALUE];
-   int number = 0;
    char* endptr;
    printf ("\nEnter an integer: ");
    char* i = fgets (input, sizeof (input), stdin);
-   char* intResult = strchr (input, ch);
-   number = strtol (input, &endptr, 10);
+   char* intResult = strchr (input, '\n');
+   int number = strtol (input, &endptr, 10);
    if (intResult == NULL) ClrBuffer (option);
    if (i == NULL || endptr == input || *endptr != '\n' || input[0] == ' ' || input[0] == '\t') printf ("INVALID!!!\n\n");
    else if (errno == ERANGE) printf ("INPUT LIMIT EXCEEDED\n");
@@ -107,14 +106,14 @@ void OutputCheck () {
    char* strInput[] = { "Don't nod","I did, did I?", "racecar","Was it a car or a cat I saw?","Trumpf Metamation","RADAR","NASA","MALAYALAM"," NUN","LEVEL" };
    int strLength = sizeof (strInput) / sizeof (strInput[0]);
    for (int i = 0; i < strLength; i++) {
-      printf ("Test Case%d: Input--> %28s ", i+1 , strInput[i]);
-      printf ((StringIsPalindrome (strInput[i]) == true) ? "%25s", "PASS\n" : "FAIL\n");
+      printf ("Test Case%3d: Input--> %-28s ", i+1 , strInput[i]);
+      printf ((StringIsPalindrome (strInput[i]) == true) ? "%-25s", "PASS\n" : "FAIL\n");
    }
    printf ("\n*****REVERSE A NUMBER*****\n");
    int numInput[] = { 0,94867,121,34543,8888,12542,-1,-111,154,12121 };
    int numLength = sizeof (numInput) / sizeof (numInput[0]);
    for (int i = 0; i < numLength; i++) {
-      printf ("Test Case%2d: Input--> %6d ", i + 1, numInput[i]);
+      printf ("Test Case%3d: Input--> %-6d ", i + 1, numInput[i]);
       printf ((NumberIsPalindrome (numInput[i]) == true) ? " PASS\n" : " FAIL\n");
    }
    printf ("\n");
