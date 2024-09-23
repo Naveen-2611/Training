@@ -15,7 +15,7 @@
 #define MAX_VALUE 100
 #define MAX_CHAR 200
 
-/// <summary>Clears the buffer values </summary>
+/// <summary>Clear the buffer values </summary>
 void ClrBuffer (char option) {
    for (;;) {
       option = fgetc (stdin);
@@ -23,35 +23,35 @@ void ClrBuffer (char option) {
    }
 }
 
-/// <summary>Functions to print result</summary>
+/// <summary>Function to print result</summary>
 void PrintResult (bool value) {
    printf (value ? ("\nIt is a Palindrome\n\n") : ("\nIt is not a Palindrome\n\n"));
 }
 
-/// <summary>Clears the content on screen</summary>
+/// <summary>Clear the content on screen</summary>
 void ClrScreen () {
 #ifdef _WIN32
    system ("cls");
 #endif 
 }
 
-/// <summary>Functions to check the given number is palindrome or not </summary>
+/// <summary>Function to check the given number is palindrome or not </summary>
 bool NumberIsPalindrome (int num) {
-   if (num < 0) {
-      printf ("Output:%7s", "INVALID");
-      return false;
-   }
    int org = num;
    long long int rev = 0; // used to store reverse number exceeding integer range
    while (num != 0) {
       rev = rev * 10 + num % 10;
       num /= 10;
    }
-   printf ("Output:%7lld", rev);
+   if (org < 0) {
+      printf ("Output: %-7lld", rev);
+      rev = -rev;
+   }
+   else printf ("Output: %-7lld", rev);
    return (rev == org);
 }
 
-/// <summary>Functions to check the given string is palindrome or not </summary>
+/// <summary>Function to check the given string is palindrome or not </summary>
 bool StringIsPalindrome (char* sentences) {
    int i = 0, j = 0, length = 0;
    length = (int)strlen (sentences);
@@ -86,11 +86,10 @@ void IntegerInput (int option) {
 
 /// <summary>Function to get string input from user</summary>
 void StringInput (int option) {
-   char ch = '\n';
    char sentences[MAX_CHAR];
-   printf ("\nEnter a sentences: ");
+   printf ("\nEnter a sentence: ");
    char* j = fgets (sentences, sizeof (sentences), stdin);
-   char* strResult = strchr (sentences, ch);
+   char* strResult = strchr (sentences, '\n');
    if (j != NULL && sentences[0] != '\n' && strResult != NULL) {
       PrintResult (StringIsPalindrome (sentences));
    }
@@ -103,14 +102,14 @@ void StringInput (int option) {
 /// <summary>Function to check test cases</summary>
 void OutputCheck () {
    printf ("\n*****PALINDROME CHECK*****\n");
-   char* strInput[] = { "Don't nod","I did, did I?", "racecar","Was it a car or a cat I saw?","Trumpf Metamation","RADAR","NASA","MALAYALAM"," NUN","LEVEL" };
+   char* strInput[] = { "Don't nod","Able was I ere I saw Elba", "racecar","Otto","Trumpf Metamation","RADAR","NASA","MALAYALAM","Kayak","LEVEL" };
    int strLength = sizeof (strInput) / sizeof (strInput[0]);
    for (int i = 0; i < strLength; i++) {
-      printf ("Test Case%3d: Input--> %-28s ", i+1 , strInput[i]);
+      printf ("Test Case%3d: Input--> %-28s ", i + 1, strInput[i]);
       printf ((StringIsPalindrome (strInput[i]) == true) ? "%-25s", "PASS\n" : "FAIL\n");
    }
    printf ("\n*****REVERSE A NUMBER*****\n");
-   int numInput[] = { 0,94867,121,34543,8888,12542,-1,-111,154,12121 };
+   int numInput[] = { 0,89756,121,34543,7777,13487,-1,-111,123,12121 };
    int numLength = sizeof (numInput) / sizeof (numInput[0]);
    for (int i = 0; i < numLength; i++) {
       printf ("Test Case%3d: Input--> %-6d ", i + 1, numInput[i]);
