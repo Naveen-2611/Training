@@ -90,9 +90,8 @@ void StringInput (int option) {
    printf ("\nEnter a sentence: ");
    char* j = fgets (sentences, sizeof (sentences), stdin);
    char* strResult = strchr (sentences, '\n');
-   if (j != NULL && sentences[0] != '\n' && strResult != NULL) {
+   if (j != NULL && sentences[0] != '\n' && strResult != NULL) 
       PrintResult (StringIsPalindrome (sentences));
-   }
    else {
       printf ("INVALID!!!\n\n");
       ClrBuffer (option);
