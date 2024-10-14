@@ -71,11 +71,10 @@ bool StringIsPalindrome (char* sentences) {
 /// <summary>Function to get integer input from user</summary>
 void IntegerInput (int option) {
    errno = 0;
-   char input[MAX_VALUE];
-   char* endptr;
+   char input[MAX_VALUE], * endptr, * intResult, * i;
    printf ("\nEnter an integer: ");
-   char* i = fgets (input, sizeof (input), stdin);
-   char* intResult = strchr (input, '\n');
+   i = fgets (input, sizeof (input), stdin);
+   intResult = strchr (input, '\n');
    int number = strtol (input, &endptr, 10);
    if (intResult == NULL) ClrBuffer (option);
    if (i == NULL || endptr == input || *endptr != '\n' || input[0] == ' ' || input[0] == '\t') printf ("INVALID!!!\n\n");
@@ -85,10 +84,10 @@ void IntegerInput (int option) {
 
 /// <summary>Function to get string input from user</summary>
 void StringInput (int option) {
-   char sentences[MAX_CHAR];
+   char sentences[MAX_CHAR], * j, * strResult;
    printf ("\nEnter a sentence: ");
-   char* j = fgets (sentences, sizeof (sentences), stdin);
-   char* strResult = strchr (sentences, '\n');
+   j = fgets (sentences, sizeof (sentences), stdin);
+   strResult = strchr (sentences, '\n');
    if (j != NULL && sentences[0] != '\n' && strResult != NULL)
       PrintResult (StringIsPalindrome (sentences));
    else {
@@ -116,7 +115,6 @@ void OutputCheck () {
       int result1 = NumberIsPalindrome (NumInput[i]);
       printf ("Test Case%3d: Input--> %-6d ", i + 1, NumInput[i]);
       printf ((result1 == NumExpected[i]) ? " PASS\n" : " FAIL\n");
-      //printf ((NumberIsPalindrome (NumInput[i]) == true) ? " PASS\n" : " FAIL\n");
    }
    printf ("\n");
 }
@@ -132,7 +130,6 @@ int main () {
          while (getchar () != '\n');
       if (ptr == NULL || result == NULL || isdigit (choice[0]) == 0 || num > 5 || num < 1)
          printf ("Enter the number between 1-5\n\n");
-
       else {
          switch (num) {
          case 1:
