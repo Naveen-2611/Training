@@ -10,16 +10,8 @@
 #include<stdlib.h>
 #include<string.h>
 #include<stdint.h>
+#include"Header.h"
 
-#define RESET   "\033[0m"
-#define RED     "\033[31m"
-#define GREEN   "\033[32m"
-#define YELLOW  "\033[33m"
-#define MAGENTA "\033[35m"
-#define CYAN    "\033[36m"
-
-#define MAX 13
-#define SIZE 6
 
 void ClrScreen () {
 #ifdef _WIN32
@@ -28,40 +20,7 @@ void ClrScreen () {
 }
 
 
-void BubbleSort (int arr[], int n) {
-   for (int i = 0; i < n - 1; i++) {
-      bool swapped = false;
-      for (int j = 0; j < n - i - 1; j++) {
-         if (arr[j] > arr[j + 1]) {
-            int temp = arr[j];
-            arr[j] = arr[j + 1];
-            arr[j + 1] = temp;
-            swapped = true;
-         }
-      }
-      if (swapped == false)
-         break;
-   }
-}
-
-int BinarySearch (int arr[], int n, int key) {
-   int left = 0;
-   int right = n - 1, result = -1;
-   while (left <= right) {
-      int mid = (left + right) / 2;
-      if (arr[mid] == key) {
-         result = mid;
-         right = mid - 1;
-      }
-      else if (arr[mid] < key) {
-         left = mid + 1;
-      }
-      else {
-         right = mid - 1;
-      }
-   }return result;
-}
-
+/// <summary>To get the user input </summary>
 int UserInput (char* context) {
    long long int value = 0;
    while (1) {
@@ -81,6 +40,7 @@ int UserInput (char* context) {
    return (int)value;
 }
 
+/// <summary>To implement the sort and search algorithm </summary>
 int SortAndSearch () {
    int value = UserInput ("\033[33mEnter the size:\033[0m"); //value varaiable pass dynamic memory allocate
    int* output = (int*)malloc (value * sizeof (int));
@@ -102,6 +62,7 @@ int SortAndSearch () {
    return 0;
 }
 
+/// <summary>Function to run the test cases </summary>
 void TestCases () {
    printf ("\033[36m\n*****TestCases*****\n\033[0m");
    int IpArray[][SIZE] = { {20,19,-5,30,21 }, 
