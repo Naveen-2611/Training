@@ -44,10 +44,10 @@ bool NumberIsPalindrome (int num) {
       num /= 10;
    }
    if (org < 0) {
-      printf ("Output: %-7lld", rev);
+      printf ("Output: %-7lld   ", rev);
       rev = -rev;
    }
-   else printf ("Output: %-7lld", rev);
+   else printf ("Output: %-7lld   ", rev);
    return (rev == org);
 }
 
@@ -100,21 +100,44 @@ void StringInput (int option) {
 void OutputCheck () {
    printf ("\n*****PALINDROME CHECK*****\n");
    char* strInput[] = { "Don't nod","Able was I ere I saw Elba", "racecar","Otto","Trumpf Metamation","RADAR","NASA","MALAYALAM","Kayak","LEVEL" };
-   int strExpected[] = { 1,1,1,1,0,1,0,1,1,1 };
+   char* strExpected[] = { "palindrome","palindrome","palindrome","palindrome","Not palindrome","palindrome","Not palindrome","palindrome","palindrome","palindrome" };
+   printf ("|********************Input*************************|*********Expected**********|*****Output*****"
+           "|*****Result*****\n");
    int strLength = sizeof (strInput) / sizeof (strInput[0]);
    for (int i = 0; i < strLength; i++) {
       int result = StringIsPalindrome (strInput[i]);
+      char* output1 = NULL;
+      if (result == true) {
+         output1 = "palindrome";
+      }
+      else {
+         output1 = "Not palindrome";
+      }
+
       printf ("Test Case%3d: Input--> %-28s ", i + 1, strInput[i]);
-      printf ((result == strExpected[i]) ? " PASS\n" : " FAIL\n");
+      printf ("%-30s", strExpected[i]);
+      printf ("%-20s", output1);
+      printf (strcmp (output1, strExpected[i]) == 0 ? "PASS\n" : " FAIL\n");
    }
    printf ("\n*****REVERSE A NUMBER*****\n");
    int NumInput[] = { 0,89756,121,34543,7777,13487,-1,-111,123,12121 };
-   int NumExpected[] = { 1,0,1,1,1,0,0,0,0,1 };
+   char* NumExpected[] = { "palindrome","Not palindrome","palindrome","palindrome","palindrome","Not palindrome","Not palindrome","Not palindrome","Not palindrome","palindrome" };
+   printf ("|***********Input**********|********output********|*********Expected**********|*****Output*****"
+           "|*****Result*****\n");
    int numLength = sizeof (NumInput) / sizeof (NumInput[0]);
    for (int i = 0; i < numLength; i++) {
+      printf ("Test Case%3d: Input--> %-10d ", i + 1, NumInput[i]);
       int result1 = NumberIsPalindrome (NumInput[i]);
-      printf ("Test Case%3d: Input--> %-6d ", i + 1, NumInput[i]);
-      printf ((result1 == NumExpected[i]) ? " PASS\n" : " FAIL\n");
+      char* output = NULL;
+      if (result1 == true) {
+         output = "palindrome";
+      }
+      else {
+         output = "Not palindrome";
+      }
+      printf ("%-30s", NumExpected[i]);
+      printf ("%-20s", output);
+      printf (strcmp (output, NumExpected[i]) == 0 ? "PASS\n" : "FAIL\n");
    }
    printf ("\n");
 }
