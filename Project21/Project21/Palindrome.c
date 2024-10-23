@@ -107,13 +107,7 @@ void OutputCheck () {
    for (int i = 0; i < strLength; i++) {
       int result = StringIsPalindrome (strInput[i]);
       char* output1 = NULL;
-      if (result == true) {
-         output1 = "palindrome";
-      }
-      else {
-         output1 = "Not palindrome";
-      }
-
+      output1 = (result == true) ? "palindrome" : "Not palindrome";
       printf ("Test Case%3d: Input--> %-28s ", i + 1, strInput[i]);
       printf ("%-30s", strExpected[i]);
       printf ("%-20s", output1);
@@ -129,12 +123,7 @@ void OutputCheck () {
       printf ("Test Case%3d: Input--> %-10d ", i + 1, NumInput[i]);
       int result1 = NumberIsPalindrome (NumInput[i]);
       char* output = NULL;
-      if (result1 == true) {
-         output = "palindrome";
-      }
-      else {
-         output = "Not palindrome";
-      }
+      output = (result1 == true) ? "palindrome" : "Not palindrome";
       printf ("%-30s", NumExpected[i]);
       printf ("%-20s", output);
       printf (strcmp (output, NumExpected[i]) == 0 ? "PASS\n" : "FAIL\n");
@@ -144,10 +133,8 @@ void OutputCheck () {
 
 int main () {
    while (1) {
-      char choice[3];
       printf ("1-Check Palindrome\n2-Reverse a Number\n3-Test Cases\n4-Clear The Screen\n5-Exit\nEnter an option:");
-      char* ptr = fgets (choice, sizeof (choice), stdin);
-      char* result = strchr (choice, '\n');
+      char choice[3], * ptr = fgets (choice, sizeof (choice), stdin), * result = strchr (choice, '\n');
       int num = atoi (choice);
       if (result == NULL)
          while (getchar () != '\n');
