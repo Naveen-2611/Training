@@ -42,7 +42,11 @@ int UserInput (char* context) {
 
 /// <summary>To implement the sort and search algorithm </summary>
 int SortAndSearch () {
-   int value = UserInput ("\033[33mEnter the size:\033[0m"); //value varaiable pass dynamic memory allocate
+   int value = 0;
+   do {
+       value = UserInput ("\033[33mEnter the size:\033[0m"); //value varaiable pass dynamic memory allocate
+       if (value <= 0) printf ("\033[31mINVALID\n\033[0m");
+   } while (value <= 0);
    int* output = (int*)malloc (value * sizeof (int));
    if (output == NULL) {
       printf ("Memory allocation Failed");
