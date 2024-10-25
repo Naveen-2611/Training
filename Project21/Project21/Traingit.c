@@ -11,11 +11,14 @@
 #include<string.h>
 #include<stdint.h>
 #include"Header.h"
+#include<conio.h>
 
 
 void ClrScreen () {
 #ifdef _WIN32
    system ("cls");
+#else
+   system ("clear");
 #endif 
 }
 
@@ -25,9 +28,9 @@ int UserInput (char* context) {
    long long int value = 0;
    while (1) {
       printf (context);
-      char arr[MAX];
+      char arr[13];
       char* endptr = NULL;
-      fgets (arr, MAX, stdin);
+      fgets (arr, 13, stdin);
       char* result = strchr (arr, '\n');// \n checking
       value = strtoll (arr, &endptr, 10);
       if (result == NULL) while (getchar () != '\n');
@@ -44,13 +47,13 @@ int UserInput (char* context) {
 int SortAndSearch () {
    int value = 0;
    do {
-       value = UserInput ("\033[33mEnter the size:\033[0m"); //value varaiable pass dynamic memory allocate
-       if (value <= 0) printf ("\033[31mINVALID\n\033[0m");
+      value = UserInput ("\n\n\033[33mEnter the size:\033[0m"); //value varaiable pass dynamic memory allocate
+      if (value <= 0) printf ("\033[31mINVALID\n\033[0m");
    } while (value <= 0);
    int* output = (int*)malloc (value * sizeof (int));
    if (output == NULL) {
       printf ("Memory allocation Failed");
-      return;
+      return 0;
    }
    printf ("\n\033[35mEnter the elements:\n\033[0m");
    for (int i = 0; i < value; i++) {
@@ -69,36 +72,36 @@ int SortAndSearch () {
 /// <summary>Function to run the test cases </summary>
 void TestCases () {
    printf ("\033[36m\n*****TestCases*****\n\033[0m");
-   int IpArray[][SIZE] = { {20,19,-5,30,21 }, 
+   int ipArray[][6] = { {20,19,-5,30,21,12 },
                           {55 ,-214748,47,54,8,4,},
                           {-3,25,-7,-5,2,-21},
-                          {0,1,2,3},
-                          {0,-1,-3,-2 },
-                          {-250,60,46,17},
-                          {223,2000,-287,78,-67},
+                          {0,1,2,3,4,5},
+                          {0,-1,-3,-2,-4,-5 },
+                          {-250,60,46,17,15,20},
+                          {223,2000,-287,78,-67,122},
                           {2,3,4,5,6,7} },
-      OutArray[][SIZE] = { {-5,19,20,21,30 },
+      OutArray[][6] = { {-5,12,19,20,21,30 },
                           { -214748 ,4,8,47,54,55},
                           {-21,-7,-5,-3,2,25},
-                          {0,1,2,3},
-                          {-3,-2,-1,0},
-                          {-250,17,46,60},
-                          {-287,-67,78,223,2000 },
+                          {0,1,2,3,4,5},
+                          {-5,-4,-3,-2,-1,0},
+                          {-250,15,17,20,46,60},
+                          {-287,-67,78,122,223,2000 },
                           {2,3,4,5,6,7} },
-      arraySize = sizeof (IpArray) / sizeof (IpArray[0]), //array sizes
-      sizes[] = { 5,6,6,4,4,4,5,6 }, iptarget[] = { 20,4,-7,2,-3,46,78,6, }, outIndex[] = { 2,1,1,2,0,2,2,4 }, result = 1;//sizes no of elements
+      arraySize = sizeof (ipArray) / sizeof (ipArray[0]), //array sizes
+      iptarget[] = { 20,4,-7,2,-3,46,78,6, }, outIndex[] = { 3,1,1,2,2,4,2,4 }, result = 1;//sizes no of elements
    for (int i = 0; i < arraySize; i++) {
-      int size = sizes[i];
+      int size = sizeof (ipArray[i]) / sizeof (ipArray[i][0]);
       printf ("\nInputArray:   ");
-      for (int j = 0; j < size; j++) printf ("%d ", IpArray[i][j]);
-      BubbleSort (IpArray[i], size);
+      for (int j = 0; j < size; j++) printf ("%d ", ipArray[i][j]);
+      BubbleSort (ipArray[i], size);
       printf ("\nSorted Array:  ");
-      for (int j = 0; j < size; j++) printf ("%d ", IpArray[i][j]);
+      for (int j = 0; j < size; j++) printf ("%d ", ipArray[i][j]);
       printf ("\nBubble Sort:   ");
       for (int j = 0; j < size; j++)
-         if (IpArray[i][j] != OutArray[i][j])  result = 0;
+         if (ipArray[i][j] != OutArray[i][j])  result = 0;
       printf ((result) ? "\033[32mPass\033[0m" : "\033[31mfail\033[0m");
-      int index = BinarySearch (IpArray[i], size, iptarget[i]);
+      int index = BinarySearch (ipArray[i], size, iptarget[i]);
       printf ("\nKey:   %d\nIndex: %d\nBinary Search: ", iptarget[i], index);
       printf ((index == outIndex[i]) ? "\033[32mPASS\033[0m" :
               "\033[31mFAIL\033[0m");
@@ -108,26 +111,23 @@ void TestCases () {
 
 int main () {
    for (;;) {
-      printf ("\n*****CHOOSE*****\n");
-      char* context = "1=SortAndSearch\n2=TestCases\n3=ClearScreen\n4=Exit\nChoose any option:";
-      int number = UserInput (context);
-      if (number > 4 || number < 1)
-         printf ("\033[31mEnter a number between 1-4\n\033[0m");
-      else {
-         switch (number) {
-         case 1:
+      printf ("\n*****CHOOSE*****\n1 = SortAndSearch\n2 = TestCases\n3 = ClearScreen\n4 = Exit\nChoose any option : ");
+      char choice = _getch ();
+         switch (choice) {
+         case '1':
             SortAndSearch ();
             break;
-         case 2:
+         case '2':
             TestCases ();
             break;
-         case 3:
+         case '3':
             ClrScreen ();
             break;
-         case 4:
+         case '4':
             return 0;
+         default:
+            printf ("\n\033[31mEnter a number between 1-4\n\033[0m");
          }
       }
-   }
    return 0;
 }

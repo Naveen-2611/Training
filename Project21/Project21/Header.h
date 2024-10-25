@@ -7,9 +7,6 @@
 #define MAGENTA "\033[35m"
 #define CYAN    "\033[36m"
 
-#define MAX 13
-#define SIZE 6
-
 /// <summary>Function implement for bubble sort algorithm </summary>
 void BubbleSort (int arr[], int n);
 
