@@ -40,13 +40,11 @@ static void ClrScreen () {
 /// <summary>Function to check the given number is palindrome or not </summary>
 static bool IsPalindrome (int num, long long int* rev) {
    int org = num;
-  // long long int rev = 0; // used to store reverse number exceeding integer range
    while (num != 0) {
       *rev = *rev * 10 + num % 10;
       num /= 10;
    }
    *rev = abs (*rev);
-  // else// printf ("Output: %-7lld   ", rev);
    return *rev == org;
 }
 
