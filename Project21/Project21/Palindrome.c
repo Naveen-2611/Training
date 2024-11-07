@@ -61,7 +61,7 @@ static bool StringIsPalindrome (char* sentences) {
       isValid = 1;
       if (toupper (sentences[start++]) != toupper (sentences[end--])) return false;
    }
-   return (isValid) ? true : false;
+   return true;
 }
 
 /// <summary>Function to get integer input from user</summary>
