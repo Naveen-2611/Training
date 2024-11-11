@@ -59,7 +59,8 @@ static int SortAndSearch () {
    printf ("\033[32mRESULT:\033[0m");
    for (int i = 0; i < value; i++)  printf ("%d ", output[i]);
    int res = BinarySearch (output, value, UserInput ("\n\033[36mEnter the element No to find the index:\033[0m "));
-   printf ("\n\033[32mIndex position is: %d \033[0m", res);
+   printf((res == -1) ? "\033[31mElement is not present\033[0m ":
+   "\n\033[32mIndex position is: %d \033[0m", res);
    return 0;
 }
 
@@ -110,19 +111,17 @@ static void TestCases () {
 
 int main () {
    for (;;) {
-      printf ("\n*****CHOOSE*****\n1 = SortAndSearch\n2 = TestCases\n3 = ClearScreen\n4 = Exit\nChoose any option : \n");
+      SortTestCases ();
+      TestCases ();
+      printf ("\n*****CHOOSE*****\n1 = SortAndSearch\n2 = ClearScreen\n3 = Exit\nChoose any option:");
       switch (_getch ()) {
       case '1':
          SortAndSearch ();
          break;
       case '2':
-         SortTestCases ();
-         TestCases ();
-         break;
-      case '3':
          ClrScreen ();
          break;
-      case '4':
+      case '3':
          return 0;
       default:
          printf ("\n\033[31mEnter a number between 1-4\n\033[0m");
