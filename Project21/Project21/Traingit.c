@@ -1,6 +1,6 @@
 // ------------------------------------------------------------------------------------------------
 // Training ~ A training program for new joiners at Metamation, Batch - July 2024.
-// Copyright (c) Metamation India.
+// Naveenkumar s Copyright (c) Metamation India.
 // ------------------------------------------------------------------
 // Program.c
 // Program on main branch.
@@ -72,16 +72,16 @@ int Compare_Two_Files (char* file, int* errorBit, int* errValue) {
    FILE* f1 = fopen ("temp_file.txt", "r"), * f2 = fopen (file, "r");
    if (f1 == NULL || f2 == NULL) return -1;
    char ch1, ch2;
-   int result = 1; // 1 means files are identical
+   int result = 1; 
    while (((ch1 = fgetc (f1)) != EOF) && ((ch2 = fgetc (f2)) != EOF)) {
       (*errorBit)++;
       if (ch1 != ch2) {
-         result = 0; // Files are different
+         result = 0; 
          *errValue = ch1 - '0';
          break;
       }
    }
-   if (fgetc (f1) != EOF || fgetc (f2) != EOF) result = 0; // Files are different
+   if (fgetc (f1) != EOF || fgetc (f2) != EOF) result = 0; 
    fclose (f1);
    fclose (f2);
    return result;
