@@ -124,19 +124,18 @@ int main () {
    SortTestCases ();
    TestCases ();
    for (;;) {
-
       printf ("\n*****CHOOSE*****\n1 = SortAndSearch\n2 = ClearScreen\n3 = Exit\nChoose any option:");
       switch (_getch ()) {
       case '1':
          ClrScreen ();
          SortAndSearch ();
          break;
-      /*case '2':
+      case '2':
          ClrScreen ();
-         break;*/
-      //case '3':
-      //   //ClrScreen ();
-      //   return 0;
+         break;
+      case '3':
+         ClrScreen ();
+         return 0;
       default:
          printf ("\n\033[31mEnter a number between 1-4\n\033[0m");
       }
