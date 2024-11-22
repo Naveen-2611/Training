@@ -16,7 +16,7 @@ void BubbleSort (int arr[], int n) {
       int isSwapped = 0;
       for (int j = 0; j < n - i - 1; j++)
          isSwapped = Swap (&arr[j], &arr[j + 1]);
-      if (!isSwapped)break;
+      if (!isSwapped) break;
    }
 }
 

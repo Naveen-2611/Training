@@ -45,7 +45,7 @@ static int UserInput (char* context) {
 static int SortAndSearch () {
    int value = 0;
    do {
-      value = UserInput ("\n\n\033[33mEnter the size:\033[0m"); //value varaiable pass dynamic memory allocate
+      value = UserInput ("\n\n\033[33mEnter the size:\033[0m");
       if (value <= 0) printf ("\033[31mINVALID\n\033[0m");
    } while (value <= 0);
    int* output = (int*)malloc (value * sizeof (int));
