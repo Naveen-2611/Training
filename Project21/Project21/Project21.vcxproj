@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Traingit.c" />
+    <ClCompile Include="comp.c" />
+    <ClCompile Include="testcomp.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="comp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
