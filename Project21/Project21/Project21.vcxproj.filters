@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Mealy.c">
+    <ClCompile Include="Traingit.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

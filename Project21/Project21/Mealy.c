@@ -58,12 +58,13 @@ State NextMealyState (State currentState, int input, int* output) {
       return input == 1 ? *output = 0, S2 : (*output = 0, S1);
    case S2:
       return input == 1 ? *output = 0, S3 : (*output = 0, S1);
-           // Output '1' upon seeing '011'    // Move to S3 after recognizing '011'
+      // Output '1' upon seeing '011'    
+      // Move to S3 after recognizing '011'
       // Return to S1 if input is '0'
    case S3:
+      // Reset to S0 after recognizing '011'
+      // Return to S1 if input is '0'
       return input == 0 ? *output = 1, A3 : (*output = 0, A2);
-  // Reset to S0 after recognizing '011'
-     // Return to S1 if input is '0'
    case A1:
       return input == 1 ? *output = 0, A2 : (*output = 0, S1);
    case A2:
