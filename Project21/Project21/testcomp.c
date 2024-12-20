@@ -11,17 +11,17 @@
 #include"comp.h"
 
 /// <summary> To Run the  testcases for various arithmetic operations</summary>
-static void ComplexTestcase () {
+static void ComplexTestCase () {
    printf (ANSI_COLOR_YELLOW"------------------------------------------------------------------"ANSI_COLOR_RESET);
    printf (ANSI_COLOR_MAGENTA"\n**********TestCase**********\n"ANSI_COLOR_RESET);
-   Complex Number1 = { 10.1f,12.7f }, Number2 = { 15.0f,8.7f };
-   Complex Output1 = Op_Add (Number1, Number2);
-   Complex Output2 = Op_Sub (Number1, Number2);
-   Complex Output3 = Op_Multi (Number1, Number2);
-   double Output4 = Op_Modul (Number1);
-   double Output5 = Op_Modul (Number2);
-   Complex Output6 = conjugate (Number1);
-   Complex Output7 = conjugate (Number2);
+   Complex num1 = { 10.1f,12.7f }, num2 = { 15.0f,8.7f };
+   Complex Output1 = Op_Add (num1, num2);
+   Complex Output2 = Op_Sub (num1, num2);
+   Complex Output3 = Op_Multi (num1, num2);
+   double Output4 = Op_Modul (num1);
+   double Output5 = Op_Modul (num2);
+   Complex Output6 = Conjugate (num1);
+   Complex Output7 = Conjugate (num2);
    Complex expOutputAdd = { 25.10f,21.40f }, expOutputSub = { -4.89999962f,4.00f }, expOutputMul = { 41.010002f,278.369995f }, expOutputconj1 = { 10.10f ,-12.70f }, expOutputconj2 = { 15.00f ,-8.70f };
    double expOutputMod1 = 16.226521124164869, expOutputMod2 = 17.340415290338530;
    printf (Output1.Imagpart == expOutputAdd.Imagpart && Output1.Realpart == expOutputAdd.Realpart ? "Addition:"ANSI_COLOR_GREEN"Passed\n" ANSI_COLOR_RESET : "Addition:Failed\n");
@@ -32,6 +32,6 @@ static void ComplexTestcase () {
 }
 
 int main () {
-   ComplexTestcase ();
+   ComplexTestCase ();
    return 0;
 }

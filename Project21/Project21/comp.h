@@ -32,7 +32,7 @@ Complex Op_Multi (Complex c1, Complex c2);
 double Op_Modul (Complex c);
 
 /// <summary>Calculatez the conjugate of a complex number</summary>
-Complex conjugate (Complex c);
+Complex Conjugate (Complex c);
 
 /// <summary> To print the complex numbers</summary>
 void PrintComplexNumber (Complex c);
