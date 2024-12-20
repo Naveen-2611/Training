@@ -30,7 +30,7 @@ void Mealy (char inpPath[], char outPath[]) {
    FILE* inpTestFile = fopen (inpPath, "r"),
       * outTestFile = fopen (outPath, "r"),
       * tempFile = fopen (tempPath, "w");
-   if (inpTestFile == NULL || outTestFile == NULL || tempFile == NULL) {
+   if (!inpTestFile || !outTestFile || !tempFile) {
       printf ("Error opening file");
       return;
    }
@@ -49,68 +49,29 @@ void Mealy (char inpPath[], char outPath[]) {
 State NextMealyState (State currentState, int input, int* output) {
    switch (currentState) {
    case S0:
-      if (input == 0) {
-         *output = 0;
-         return S1;  // Transition to S1 after '0'
-      }
-      else {
-         *output = 0;
-         return A1;  // Stay in S0 if input is '1'
-      }
+      // Transition to S1 after '0'
+      // Stay in S0 if input is '1'
+      return input == 0 ? *output = 0, S1 : (*output = 0, A1);
    case S1:
-      if (input == 1) {
-         *output = 0;
-         return S2;  // Transition to S2 after '01'
-      }
-      else {
-         *output = 0;
-         return S1;  // Stay in S1 if input is '0'
-      }
+      // Transition to S2 after '01'
+      // Stay in S1 if input is '0'
+      return input == 1 ? *output = 0, S2 : (*output = 0, S1);
    case S2:
-      if (input == 1) {
-         *output = 0;  // Output '1' upon seeing '011'
-         return S3;    // Move to S3 after recognizing '011'
-      }
-      else {
-         *output = 0;
-         return S1;  // Return to S1 if input is '0'
-      }
+      return input == 1 ? *output = 0, S3 : (*output = 0, S1);
+           // Output '1' upon seeing '011'    // Move to S3 after recognizing '011'
+      // Return to S1 if input is '0'
    case S3:
-      if (input == 0) {
-         *output = 1;
-         return A3;  // Reset to S0 after recognizing '011'
-      }
-      else {
-         *output = 0;
-         return A2;  // Return to S1 if input is '0'
-      }
+      return input == 0 ? *output = 1, A3 : (*output = 0, A2);
+  // Reset to S0 after recognizing '011'
+     // Return to S1 if input is '0'
    case A1:
-      if (input == 1) {
-         *output = 0;
-         return A2;
-      }
-      else {
-         *output = 0;
-         return S1;
-      }
+      return input == 1 ? *output = 0, A2 : (*output = 0, S1);
    case A2:
-      if (input == 0) {
-         *output = 0;
-         return A3;
-      }
-      else {
-         *output = 0;
-         return A2;
-      }
+      return input == 0 ? *output = 0, A3 : (*output = 0, A2);
    case A3:
-      if (input == 1) {
-         *output = 1;
-         return S2;
-      }
-      else {
-         *output = 0;
-         return S1;
-      }
+      return input == 1 ? *output = 1, S2 : (*output = 0, S1);
+   default:
+      // Default return to initial state
+      return S0;
    }
-   return S0;  // Default return to initial state
 }

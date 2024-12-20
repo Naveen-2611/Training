@@ -7,9 +7,9 @@
 // ------------------------------------------------------------------------------------------------
 
 #define _CRT_SECURE_NO_WARNINGS  1
-#include <windows.h>
-#include <stdio.h>
 #include <malloc.h>
+#include <stdio.h>
+#include <windows.h>
 
 
 /// <summary>
@@ -72,16 +72,16 @@ int Compare_Two_Files (char* file, int* errorBit, int* errValue) {
    FILE* f1 = fopen ("temp_file.txt", "r"), * f2 = fopen (file, "r");
    if (f1 == NULL || f2 == NULL) return -1;
    char ch1, ch2;
-   int result = 1; 
+   int result = 1;
    while (((ch1 = fgetc (f1)) != EOF) && ((ch2 = fgetc (f2)) != EOF)) {
       (*errorBit)++;
       if (ch1 != ch2) {
-         result = 0; 
+         result = 0;
          *errValue = ch1 - '0';
          break;
       }
    }
-   if (fgetc (f1) != EOF || fgetc (f2) != EOF) result = 0; 
+   if (fgetc (f1) != EOF || fgetc (f2) != EOF) result = 0;
    fclose (f1);
    fclose (f2);
    return result;
@@ -106,7 +106,7 @@ int main (int argc, char** argv) {
       char input[MAX_PATH], output[MAX_PATH];
       sprintf (input, "TestInput%d.txt", i + 1);
       sprintf (output, "TestOutput%d.txt", i + 1);
-      if (ExecProgram (argv[1], input,output) != 0) {  // change the name of the input and output files in each set.
+      if (ExecProgram (argv[1], input, output) != 0) {  // change the name of the input and output files in each set.
          printf ("Error executing test %d\n", i + 1);
       }
       else {
