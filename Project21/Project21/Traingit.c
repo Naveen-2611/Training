@@ -111,7 +111,7 @@ int main (int argc, char** argv) {
       else {
          int errorBit = 0, errValue = 0, result = Compare_Two_Files (ref, out,&errorBit, &errValue), crtValue = errValue ? 0 : 1;
          if (result)printf ("No Error Testing %s\n", input);
-         else if (!result)printf ("Error at Bit.%d in %s\nExpected:%d Actual:%d\n", errorBit, input, crtValue, errValue);
+         else if (!result)printf ("Error at Bit.%d in %s\nExpected:%d Actual:%d\n", errorBit, input, errValue, crtValue);
          else printf ("Error Open File%d\n", i + 1);
 
       }
