@@ -16,20 +16,20 @@
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
 typedef struct {
-   float Realpart, Imagpart;
+   float RealPart, ImagPart;
 }Complex;
 
 /// <summary>Add the two complex numbers</summary>
-Complex Op_Add (Complex c1, Complex c2);
+Complex OpAdd (Complex c1, Complex c2);
 
 /// <summary>Subtract the complex number  </summary>
-Complex Op_Sub (Complex c1, Complex c2);
+Complex OpSub (Complex c1, Complex c2);
 
 /// <summary>Multiplies the  two complex numbers</summary>
-Complex Op_Multi (Complex c1, Complex c2);
+Complex OpMulti (Complex c1, Complex c2);
 
 /// <summary>Calculates the modulus of a complex number</summary>
-double Op_Modul (Complex c);
+double OpModul (Complex c);
 
 /// <summary>Calculatez the conjugate of a complex number</summary>
 Complex Conjugate (Complex c);

@@ -15,11 +15,11 @@ static void ComplexTestCase () {
    printf (ANSI_COLOR_YELLOW"------------------------------------------------------------------"ANSI_COLOR_RESET);
    printf (ANSI_COLOR_MAGENTA"\n**********TestCase**********\n"ANSI_COLOR_RESET);
    Complex num1 = { 10.1f,12.7f }, num2 = { 15.0f,8.7f };
-   Complex Output1 = Op_Add (num1, num2);
-   Complex Output2 = Op_Sub (num1, num2);
-   Complex Output3 = Op_Multi (num1, num2);
-   double Output4 = Op_Modul (num1);
-   double Output5 = Op_Modul (num2);
+   Complex Output1 = OpAdd (num1, num2);
+   Complex Output2 = OpSub (num1, num2);
+   Complex Output3 = OpMulti (num1, num2);
+   double Output4 = OpModul (num1);
+   double Output5 = OpModul (num2);
    Complex Output6 = Conjugate (num1);
    Complex Output7 = Conjugate (num2);
    Complex expOutputAdd = { 25.10f,21.40f }, expOutputSub = { -4.89999962f,4.00f }, expOutputMul = { 41.010002f,278.369995f }, expOutputconj1 = { 10.10f ,-12.70f }, expOutputconj2 = { 15.00f ,-8.70f };

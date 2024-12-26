@@ -11,22 +11,22 @@
 #include<math.h>
 #include<stdio.h>
 
-Complex Op_Add (Complex c1, Complex c2) {
+Complex OpAdd (Complex c1, Complex c2) {
    Complex output = { c1.Realpart + c2.Realpart, c1.Imagpart + c2.Imagpart };
    return output;
 }
 
-Complex Op_Sub (Complex c1, Complex c2) {
+Complex OpSub (Complex c1, Complex c2) {
    Complex output = { c1.Realpart - c2.Realpart, c1.Imagpart - c2.Imagpart };
    return output;
 }
 
-Complex Op_Multi (Complex c1, Complex c2) {
+Complex OpMulti (Complex c1, Complex c2) {
    Complex output = { c1.Realpart * c2.Realpart - c1.Imagpart * c2.Imagpart, c1.Realpart * c2.Imagpart + c1.Imagpart * c2.Realpart };
    return output;
 }
 
-double Op_Modul (Complex c) {
+double OpModul (Complex c) {
    return sqrt (c.Realpart * c.Realpart + c.Imagpart * c.Imagpart);
 }
 
