@@ -16,7 +16,7 @@
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
 /// <summary>To calculate number of coins </summary>
-static void CalculateBalance (int* denominations, int balance, int* count) {
+void CalculateBalance (int* denominations, int balance, int* count) {
    for (int i = 0; i < 4; i++) {
       count[i] = balance / denominations[i];
       balance = balance % denominations[i];
@@ -37,6 +37,7 @@ static void Testcase (int* denominations) {
       printf (j == 4 ? ANSI_COLOR_GREEN"Passed\n"ANSI_COLOR_RESET : ANSI_COLOR_RED "Failed\n"ANSI_COLOR_RESET);
    }
 }
+
 int main () {
    char amount[50];
    int denominations[] = { 10, 5, 2, 1 }, count[4] = { 0 };
