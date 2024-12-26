@@ -68,8 +68,8 @@ int ExecProgram (char* exeFilePathAndName, char* inputFilePathAndName, char* out
 
 }
 
-int Compare_Two_Files (char* file, int* errorBit, int* errValue) {
-   FILE* f1 = fopen ("temp_file.txt", "r"), * f2 = fopen (file, "r");
+int Compare_Two_Files (char* file,char*out, int* errorBit, int* errValue) {
+   FILE* f1 = fopen (out, "r"), * f2 = fopen (file, "r");
    if (f1 == NULL || f2 == NULL) return -1;
    char ch1, ch2;
    int result = 1;
@@ -95,7 +95,6 @@ int Compare_Two_Files (char* file, int* errorBit, int* errValue) {
 /// <returns></returns>
 int main (int argc, char** argv) {
 #define NTESTS 5                    // change this according to the number of tests you design. The more unique and relevant test patterns, the more complete your testing.
-
    printf ("FSM Test Harness\n");
    if (argc != 2) {
       printf ("Usage: %s <FSM executable name>\n,", argv[0]);
@@ -103,20 +102,19 @@ int main (int argc, char** argv) {
    }
 
    for (int i = 0; i < NTESTS; i++) {
-      char input[MAX_PATH], output[MAX_PATH];
-      sprintf (input, "TestInput%d.txt", i + 1);
-      sprintf (output, "TestOutput%d.txt", i + 1);
-      if (ExecProgram (argv[1], input, output) != 0) {  // change the name of the input and output files in each set.
+      char input[MAX_PATH], ref[MAX_PATH],*out = "C:\\etc\\temp.txt";
+      sprintf (input, "TData\\TestInput%d.txt", i + 1);
+      sprintf (ref, "TData\\Reference%d.txt", i + 1);
+      if (ExecProgram (argv[1], input, out) != 0) {  // change the name of the input and output files in each set.
          printf ("Error executing test %d\n", i + 1);
       }
       else {
-         int errorBit = 0, errValue = 0, result = Compare_Two_Files (output, &errorBit, &errValue), crtValue = errValue ? 0 : 1;
+         int errorBit = 0, errValue = 0, result = Compare_Two_Files (ref, out,&errorBit, &errValue), crtValue = errValue ? 0 : 1;
          if (result)printf ("No Error Testing %s\n", input);
          else if (!result)printf ("Error at Bit.%d in %s\nExpected:%d Actual:%d\n", errorBit, input, crtValue, errValue);
          else printf ("Error Open File%d\n", i + 1);
 
       }
    }
-
 }
 
