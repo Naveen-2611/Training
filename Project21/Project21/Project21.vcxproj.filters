@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Traingit.c">
+    <ClCompile Include="Boardgame.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
