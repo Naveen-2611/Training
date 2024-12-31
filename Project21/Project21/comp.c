@@ -39,3 +39,7 @@ void PrintComplexNumber (Complex c) {
    if (c.ImagPart >= 0) printf ("%f + %fi\n", c.RealPart, c.ImagPart);
    else printf ("%f - %fi\n", c.RealPart, -c.ImagPart);
 }
+
+void isEqual () {
+
+}
