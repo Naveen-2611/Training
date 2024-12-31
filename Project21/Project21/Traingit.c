@@ -29,7 +29,7 @@ static void ChessBoardTest (char* output) {
 
 void main () {
    int a = _setmode (_fileno (stdout), _O_U8TEXT);
-   char* output = "outputfile.txt";
+   char* output = "C:\\etc\\outputfile.txt";
    FILE* f1 = fopen (output, "w ,ccs = UTF-8");
    if (f1 == NULL)wprintf (L"Unable to  open ");
    else {
