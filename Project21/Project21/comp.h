@@ -8,12 +8,7 @@
 // Naveenkumar s
 // ------------------------------------------------------------------------------------------------
 
-#define ANSI_COLOR_GREEN   "\x1b[32m"
-#define ANSI_COLOR_YELLOW  "\x1b[33m"
-#define ANSI_COLOR_BLUE    "\x1b[34m"
-#define ANSI_COLOR_MAGENTA "\x1b[35m"
-#define ANSI_COLOR_CYAN    "\x1b[36m"
-#define ANSI_COLOR_RESET   "\x1b[0m"
+#include<stdbool.h>
 
 typedef struct {
    float RealPart, ImagPart;
@@ -34,5 +29,5 @@ double OpModul (Complex c);
 /// <summary>Calculatez the conjugate of a complex number</summary>
 Complex Conjugate (Complex c);
 
-/// <summary> To print the complex numbers</summary>
-void PrintComplexNumber (Complex c);
+/// <summary> Functions to compare the two complex numbers</summary>
+bool IsEqual (Complex a, Complex b);

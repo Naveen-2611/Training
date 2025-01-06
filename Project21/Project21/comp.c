@@ -9,7 +9,7 @@
 
 #include"comp.h"
 #include<math.h>
-#include<stdio.h>
+#include<stdbool.h>
 
 Complex OpAdd (Complex c1, Complex c2) {
    Complex output = { c1.RealPart + c2.RealPart, c1.ImagPart + c2.ImagPart };
@@ -35,11 +35,6 @@ Complex Conjugate (Complex c) {
    return output;
 }
 
-void PrintComplexNumber (Complex c) {
-   if (c.ImagPart >= 0) printf ("%f + %fi\n", c.RealPart, c.ImagPart);
-   else printf ("%f - %fi\n", c.RealPart, -c.ImagPart);
-}
-
-void isEqual () {
-
+bool IsEqual (Complex a, Complex b) {
+   return a.ImagPart == b.ImagPart && a.RealPart == b.RealPart;
 }
