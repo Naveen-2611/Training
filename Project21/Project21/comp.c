@@ -38,6 +38,5 @@ Complex Conjugate (Complex c) {
 }
 
 bool IsEqual (Complex a, Complex b) {
-  // return a.ImagPart == b.ImagPart && a.RealPart == b.RealPart;
    return (fabs (a.ImagPart - b.ImagPart) < EPSILON) && (fabs (a.RealPart - b.RealPart) < EPSILON);
 }
