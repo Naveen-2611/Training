@@ -11,6 +11,8 @@
 #include<math.h>
 #include<stdbool.h>
 
+#define EPSILON 1e-9
+
 Complex OpAdd (Complex c1, Complex c2) {
    Complex output = { c1.RealPart + c2.RealPart, c1.ImagPart + c2.ImagPart };
    return output;
@@ -36,5 +38,6 @@ Complex Conjugate (Complex c) {
 }
 
 bool IsEqual (Complex a, Complex b) {
-   return a.ImagPart == b.ImagPart && a.RealPart == b.RealPart;
+  // return a.ImagPart == b.ImagPart && a.RealPart == b.RealPart;
+   return (fabs (a.ImagPart - b.ImagPart) < EPSILON) && (fabs (a.RealPart - b.RealPart) < EPSILON);
 }
